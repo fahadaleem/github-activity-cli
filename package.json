@@ -11,6 +11,9 @@
   },
   "keywords": [],
   "author": "",
+  "bin": {
+    "github-activity-cli": "src/index.js"
+  },
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
