@@ -9,7 +9,6 @@ const [, , username] = process.argv;
     );
     if (response.status === 200) {
       const activities = await response.json();
-
       if (!activities.length) {
         console.log("No recent activity found!");
       } else {
@@ -27,7 +26,15 @@ const [, , username] = process.argv;
               `${
                 activity.payload.action.charAt(0).toUpperCase() +
                 activity.payload.action.slice(1)
-              } an issue in ${event.repo.name}`
+              } an issue in ${activity.repo.name}`
+            );
+          } else if (activity.type === "WatchEvent") {
+            console.log(`Starred ${activity.repo.name}`);
+          } else if (activity.type === "ForkEvent") {
+            console.log(`Forked ${activity.repo.name}`);
+          } else {
+            console.log(
+              `${activity.type.replace("Event", "")} in ${activity.repo.name}`
             );
           }
         });
